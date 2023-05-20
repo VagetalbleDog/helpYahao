@@ -10,12 +10,12 @@ export class FoodService {
     private readonly userRepository: Repository<Food>,
   ) {}
 
-  async findAll(): Promise<Food[]> {
-    return this.userRepository.find();
+  async find(query:any): Promise<Food[]> {
+    return this.userRepository.find({where:query,relations:['publishBy']});
   }
 
   async findOne(id: number): Promise<Food> {
-    return this.userRepository.findOne({ where: { id } });
+    return this.userRepository.findOne({ where: { id } ,relations:['publishBy']});
   }
 
   async create(user: Food): Promise<Food> {
