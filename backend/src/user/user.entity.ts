@@ -5,15 +5,22 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({
+    type:'varchar'
+  })
   username: string;
-
-  @Column()
+  @Column({
+    type:'varchar'
+  })
   nickname: string;
 
-  @Column()
+  @Column({
+    type:'varchar'
+  })
   password: string;
 
-  @Column()
-  type: string;
+  @Column({
+    type:'int'
+  })
+  type: number
 }
