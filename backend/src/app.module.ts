@@ -10,7 +10,7 @@ import { foodModule } from './food/food.module';
     type: "mysql",
     host: "localhost",
     username: "root",
-    password: "123456789",
+    password: "cid418sh",
     database: "canteenSystem",
     port: 3306,
     entities: [User],
