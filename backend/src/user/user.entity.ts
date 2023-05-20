@@ -1,5 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-
+import { Food } from 'src/food/food.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+export const enum UserType{
+  'student',
+  'ad'
+}
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -19,8 +23,9 @@ export class User {
   })
   password: string;
 
-  @Column({
-    type:'int'
-  })
-  type: number
+  @Column()
+  type: UserType
+
+  @OneToMany(()=>Food,food=>food.publishBy)
+  publishFoods:Food[]
 }

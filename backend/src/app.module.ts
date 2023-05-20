@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user/user.entity';
 import { UserModule } from './user/user.module';
+import { foodModule } from './food/food.module';
 @Module({
   imports: [TypeOrmModule.forRoot({
     type: "mysql",
@@ -16,7 +17,7 @@ import { UserModule } from './user/user.module';
     synchronize: true,
     autoLoadEntities: true,
   }),
-UserModule],
+UserModule,foodModule],
   controllers: [AppController],
   providers: [AppService],
 })
