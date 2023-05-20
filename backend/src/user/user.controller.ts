@@ -51,8 +51,19 @@ export class UserController {
 
 
   @Post('/update')
-  async update( @Body() user: User): Promise<User> {
-    const id = user.id;
-    return this.userService.update(id, user);
+  async update( @Body() user: User) {
+    try{
+      const id = user.id;
+      await this.userService.update(id, user);
+      return {
+        code:201,
+        message:'success'
+      }
+    }catch{
+      return {
+        code:500,
+        message:"failed"
+      }
+    }
   }
 }

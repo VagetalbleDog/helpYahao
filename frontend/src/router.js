@@ -4,6 +4,9 @@ import LoginComponent from './components/LoginComponent.vue';
 import AdminLogin from './components/AdminLogin.vue'
 import RegisterComponent from './components/RegisterComponent.vue';
 import App from './App.vue'
+import userCenter from './components/userCenter.vue'
+import setUserInfo from './components/setUserInfo.vue'
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -11,7 +14,8 @@ const routes = [
     { path: '/adminlogin', component: AdminLogin, name: 'register' },
     { path: '/register', component: RegisterComponent, name: 'register' },
     { path: '/', component: App, name: '/' },
-
+    { path: '/userCenter/:id', component: userCenter, name: 'userCenter' },
+    { path: '/setUserInfo/:id', component: setUserInfo, name: 'setUserInfo' }
     // 其他路由配置
 ];
 
