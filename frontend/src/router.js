@@ -16,8 +16,8 @@ const routes = [
     { path: '/register', component: RegisterComponent, name: 'register',meta:{showHome:false}},
     { path: '/', component: App, name: '/',meta:{showHome:true}},
     { path: '/home', component: HomeComponent, name: 'home',meta:{showHome:true}},
-    { path: '/userCenter/:id', component: userCenter, name: 'userCenter',meta:{showHome:true} },
-    { path: '/setUserInfo/:id', component: setUserInfo, name: 'setUserInfo',meta:{showHome:true} }
+    { path: '/userCenter/:id', component: userCenter, name: 'userCenter',meta:{showHome:false} },
+    { path: '/setUserInfo/:id', component: setUserInfo, name: 'setUserInfo',meta:{showHome:false} }
     // 其他路由配置
 ];
 
