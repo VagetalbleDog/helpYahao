@@ -1,24 +1,31 @@
 <template>
-    <div class="login-container">
-        <h2>管理员登录</h2>
-        <el-form ref="loginForm" :model="loginForm" :rules="loginFormRules" label-width="100px">
-            <el-form-item label="手机号" prop="phoneNumber">
-                <el-input v-model="loginForm.phoneNumber"></el-input>
-            </el-form-item>
-            <el-form-item label="密码" prop="password">
-                <el-input type="password" v-model="loginForm.password"></el-input>
-            </el-form-item>
-            <el-form-item>
-                <el-button type="primary" @click="login">确认登录</el-button>
-                <el-button @click="goToLogin">用户登录</el-button>
-                <el-button @click="goToRegister">注册</el-button>
-            </el-form-item>
-        </el-form>
+    <div>
+        <el-row class="toolbar" justify="center">
+            <el-col :span="24">
+                <div class="title">高校食堂管理信息系统</div>
+            </el-col>
+        </el-row>
+        <div class="login-container">
+            <h2>管理员登录</h2>
+            <el-form ref="loginForm" :model="loginForm" :rules="loginFormRules" label-width="100px">
+                <el-form-item label="手机号" prop="phoneNumber">
+                    <el-input v-model="loginForm.phoneNumber"></el-input>
+                </el-form-item>
+                <el-form-item label="密码" prop="password">
+                    <el-input type="password" v-model="loginForm.password"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="login">确认登录</el-button>
+                    <el-button @click="goToLogin">用户登录</el-button>
+                    <el-button @click="goToRegister">注册</el-button>
+                </el-form-item>
+            </el-form>
+        </div>
     </div>
 </template>
 
 <script>
-import { Form, FormItem, Input, Button} from 'element-ui';
+import { Form, FormItem, Input, Button } from 'element-ui';
 import axios from 'axios';
 export default {
     data() {
@@ -50,12 +57,12 @@ export default {
                             // 登录成功的处理逻辑
                             if (response.data.code === 500) {
                                 this.$message({
-                                    message: '登录失败',
+                                    message: '登录失败，请重新登录！',
                                     type: 'warning'
                                 });
-                            }else {
+                            } else {
                                 this.$message({
-                                    message: '登陆成功！',
+                                    message: '登陆成功，欢迎使用！',
                                     type: 'success'
                                 });
                                 localStorage.setItem('id', response.data.id);
@@ -76,7 +83,7 @@ export default {
             // 跳转到注册页面
             this.$router.push('/register');
         },
-        goToLogin(){
+        goToLogin() {
             this.$router.push('/login');
         }
     }
@@ -84,6 +91,13 @@ export default {
 </script>
   
 <style scoped>
+.title {
+    background-color: #f0f0f0;
+    height: 58px;
+    line-height: 58px;
+    font-size: larger;
+    color: #409EFF;
+}
 .login-container {
     max-width: 400px;
     margin: 60px auto 0;

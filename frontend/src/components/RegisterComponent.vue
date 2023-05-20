@@ -1,34 +1,47 @@
 <template>
-    <div class="register-container">
-        <h2>用户注册</h2>
-        <el-form ref="registerForm" :model="registerForm" :rules="registerFormRules" label-width="100px"
-            class="form-container">
-            <el-form-item label="用户名" prop="username">
-                <el-input v-model="registerForm.username"></el-input>
-            </el-form-item>
-            <!-- 枚举1男 -->
-            <el-form-item label="性别" prop="gender">
-                <el-radio-group v-model="registerForm.gender">
-                    <el-radio :label="1">男</el-radio>
-                    <el-radio :label="2">女</el-radio>
-                </el-radio-group>
-            </el-form-item>
-            <el-form-item label="手机号" prop="phoneNumber">
-                <el-input v-model="registerForm.phoneNumber"></el-input>
-            </el-form-item>
-            <el-form-item label="密码" prop="password">
-                <el-input type="password" v-model="registerForm.password"></el-input>
-            </el-form-item>
-            <el-form-item label="确认密码" prop="confirmPassword">
-                <el-input type="password" v-model="registerForm.confirmPassword"></el-input>
-            </el-form-item>
-            <el-form-item>
-                <el-button type="primary" @click="submitForm">注册</el-button>
-                <el-button type="primary" @click="goToAdminLogin">管理员登录</el-button>
-                <el-button type="primary" @click="goToLogin">用户登录</el-button>
+    <div>
+        <el-row class="toolbar" justify="center">
+            <el-col :span="24">
+                <div class="title">高校食堂管理信息系统</div>
+            </el-col>
+        </el-row>
+        <div class="register-container">
+            <h2>用户注册</h2>
+            <el-form ref="registerForm" :model="registerForm" :rules="registerFormRules" label-width="100px"
+                class="form-container">
+                <el-form-item label="用户名" prop="username">
+                    <el-input v-model="registerForm.username"></el-input>
+                </el-form-item>
+                <!-- 枚举1男 -->
+                <el-form-item label="性别" prop="gender">
+                    <el-radio-group v-model="registerForm.gender">
+                        <el-radio :label="1">男</el-radio>
+                        <el-radio :label="2">女</el-radio>
+                    </el-radio-group>
+                </el-form-item>
+                <el-form-item label="用户类型" prop="type">
+                    <el-radio-group v-model="registerForm.type">
+                        <el-radio :label="1">学生</el-radio>
+                        <el-radio :label="2">商家</el-radio>
+                    </el-radio-group>
+                </el-form-item>
+                <el-form-item label="手机号" prop="phoneNumber">
+                    <el-input v-model="registerForm.phoneNumber"></el-input>
+                </el-form-item>
+                <el-form-item label="密码" prop="password">
+                    <el-input type="password" v-model="registerForm.password"></el-input>
+                </el-form-item>
+                <el-form-item label="确认密码" prop="confirmPassword">
+                    <el-input type="password" v-model="registerForm.confirmPassword"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="submitForm">注册</el-button>
+                    <el-button type="primary" @click="goToAdminLogin">管理员登录</el-button>
+                    <el-button type="primary" @click="goToLogin">用户登录</el-button>
 
-            </el-form-item>
-        </el-form>
+                </el-form-item>
+            </el-form>
+        </div>
     </div>
 </template>
 
@@ -45,7 +58,8 @@ export default {
                 phoneNumber: '',
                 password: '',
                 confirmPassword: '',
-                // type:0, // 1学生2管理员
+
+                type:1, // 1学生2管理员
             },
             registerFormRules: {
                 username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
@@ -76,7 +90,6 @@ export default {
                     const data = {
                         ...this.registerForm,
                         confirmPassword: undefined,
-                        type: 1,
                     }
                     axios.post('/user/register', data)
                         .then(response => {
@@ -84,13 +97,13 @@ export default {
 
                             if (response.data.code === 500) {
                                 this.$message({
-                                    message: '注册失败',
+                                    message: '注册失败，请重新注册！',
                                     type: 'success'
                                 });
 
-                            }else {
+                            } else {
                                 this.$message({
-                                    message: '注册成功，请重新注册！',
+                                    message: '注册成功，请登录！',
                                     type: 'warning'
                                 });
                                 this.$router.push('/login');
@@ -114,10 +127,10 @@ export default {
                 callback();
             }
         },
-        goToAdminLogin(){
+        goToAdminLogin() {
             this.$router.push('/adminlogin');
         },
-        goToLogin(){
+        goToLogin() {
             this.$router.push('/login');
         }
     }
@@ -125,6 +138,13 @@ export default {
 </script>
 
 <style scoped>
+.title {
+    background-color: #f0f0f0;
+    height: 58px;
+    line-height: 58px;
+    font-size: larger;
+    color: #409EFF;
+}
 .register-container {
     max-width: 400px;
     margin: 60px auto 0;

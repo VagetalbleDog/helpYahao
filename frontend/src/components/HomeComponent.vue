@@ -9,13 +9,16 @@
                         <el-button class="toolbar-item" type="primary" @click="goToLogin">用户登录</el-button>
                         <el-button class="toolbar-item" type="primary" @click="goToAdminLogin">商家登录</el-button>
                     </div>
-                    <div class="right-buttons">
+                    <div style="font-size: larger;;color: #409EFF;">高校食堂管理信息系统</div>
+                    <div v-if="user.id">{{ user.username }}
+                        {{ user.type===1?"学生":"商家" }}</div>
+                    <div v-else style="color: red;">请登录！</div>
+                    <div v-if="user.id" class="right-buttons">
                         <el-button class="toolbar-item" type="primary" @click="goToPersonInfo">个人信息</el-button>
                     </div>
                 </div>
             </el-col>
         </el-row>
-
         <!-- 主题内容 -->
         <el-row class="content" justify="center">
             <el-col :span="24">
@@ -52,7 +55,9 @@ export default {
     name: 'HomePage',
     data() {
         return {
-            foodList: [] // 数据库food中的数据
+            foodList: [], // 数据库food中的数据
+
+            user:{},
         };
     },
     methods: {
@@ -83,6 +88,9 @@ export default {
         handleDelete() {
             // 处理删除操作的逻辑
         }
+    },
+    mounted(){
+        this.user=JSON.parse(localStorage.getItem('user'));
     }
 };
 </script>
