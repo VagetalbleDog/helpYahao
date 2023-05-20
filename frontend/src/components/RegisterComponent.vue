@@ -79,7 +79,7 @@ export default {
                         .then(response => {
                             // 注册成功的处理逻辑
 
-                            if (response.status === 500) {
+                            if (response.data.code === 500) {
                                 this.$message({
                                     message: '注册失败',
                                     type: 'success'
@@ -91,6 +91,7 @@ export default {
                                     message: '注册成功，请重新注册！',
                                     type: 'warning'
                                 });
+                                this.$router.push('/login');
                             }
 
                         })

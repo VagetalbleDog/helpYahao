@@ -2,8 +2,8 @@
     <div class="login-container">
         <h2>用户登录</h2>
         <el-form ref="loginForm" :model="loginForm" :rules="loginFormRules" label-width="100px">
-            <el-form-item label="手机号" prop="phone">
-                <el-input v-model="loginForm.phone"></el-input>
+            <el-form-item label="手机号" prop="phoneNumber">
+                <el-input v-model="loginForm.phoneNumber"></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="password">
                 <el-input type="password" v-model="loginForm.password"></el-input>
@@ -23,11 +23,11 @@ export default {
     data() {
         return {
             loginForm: {
-                phone: '',
+                phoneNumber: '',
                 password: ''
             },
             loginFormRules: {
-                phone: [{ required: true, message: '请输入手机号', trigger: 'blur' }],
+                phoneNumber: [{ required: true, message: '请输入手机号', trigger: 'blur' }],
                 password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
             }
         };
@@ -47,7 +47,7 @@ export default {
                     axios.post('/user/login', this.loginForm)
                         .then(response => {
                             // 注册成功的处理逻辑
-                            if (response.status === 500) {
+                            if (response.data.code === 500) {
                                 this.$message({
                                     message: '登录失败',
                                     type: 'warning'
