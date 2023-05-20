@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <router-view v-if="!shouldRedirectToRegister"></router-view>
-    <router-link v-else to="/register"></router-link>
+    <router-view v-if="!shouldRedirectToLogin">111</router-view>
+    <router-view v-else-if="!shouldRedirectToAdminLogin">222</router-view>
+    <router-link v-else to="/login"></router-link>
   </div>
 </template>
 
@@ -23,8 +24,11 @@ export default {
     // router
   },
   computed: {
-    shouldRedirectToRegister() {
-      return localStorage.getItem('register') === '1';
+    shouldRedirectToLogin() {
+      return localStorage.getItem('login') === '1';
+    },
+    shouldRedirectToAdminLogin(){
+      return localStorage.getItem('adminlogin')==='1';
     }
   }
 }

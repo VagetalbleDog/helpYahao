@@ -1,12 +1,17 @@
 import VueRouter from 'vue-router';
 import Vue from 'vue';
 import LoginComponent from './components/LoginComponent.vue';
+import AdminLogin from './components/AdminLogin.vue'
 import RegisterComponent from './components/RegisterComponent.vue';
+import App from './App.vue'
 Vue.use(VueRouter);
 
 const routes = [
     { path: '/login', component: LoginComponent, name: 'login' },
+    { path: '/adminlogin', component: AdminLogin, name: 'register' },
     { path: '/register', component: RegisterComponent, name: 'register' },
+    { path: '/', component: App, name: '/' },
+
     // 其他路由配置
 ];
 

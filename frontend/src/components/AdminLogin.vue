@@ -1,6 +1,6 @@
 <template>
     <div class="login-container">
-        <h2>用户登录</h2>
+        <h2>管理员登录</h2>
         <el-form ref="loginForm" :model="loginForm" :rules="loginFormRules" label-width="100px">
             <el-form-item label="手机号" prop="phoneNumber">
                 <el-input v-model="loginForm.phoneNumber"></el-input>
@@ -10,7 +10,7 @@
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="login">确认登录</el-button>
-                <el-button @click="goToAdminLogin">管理员登录</el-button>
+                <el-button @click="goToLogin">用户登录</el-button>
                 <el-button @click="goToRegister">注册</el-button>
             </el-form-item>
         </el-form>
@@ -58,7 +58,7 @@ export default {
                                     message: '登陆成功！',
                                     type: 'success'
                                 });
-                                localStorage.setItem('login', '1');
+                                localStorage.setItem('adminlogin','1')
                                 this.$router.push('/home');
                             }
 
@@ -76,8 +76,8 @@ export default {
             // 跳转到注册页面
             this.$router.push('/register');
         },
-        goToAdminLogin(){
-            this.$router.push('/adminlogin');
+        goToLogin(){
+            this.$router.push('/login');
         }
     }
 };

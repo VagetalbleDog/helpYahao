@@ -24,6 +24,9 @@
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="submitForm">注册</el-button>
+                <el-button type="primary" @click="goToAdminLogin">管理员登录</el-button>
+                <el-button type="primary" @click="goToLogin">用户登录</el-button>
+
             </el-form-item>
         </el-form>
     </div>
@@ -85,7 +88,6 @@ export default {
                                     type: 'success'
                                 });
 
-                                // this.$router.push('/login');
                             }else {
                                 this.$message({
                                     message: '注册成功，请重新注册！',
@@ -111,6 +113,12 @@ export default {
             } else {
                 callback();
             }
+        },
+        goToAdminLogin(){
+            this.$router.push('/adminlogin');
+        },
+        goToLogin(){
+            this.$router.push('/login');
         }
     }
 };
