@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, Query } from '@nestjs/common';
 import { Food } from './food.entity';
 import { FoodService } from './food.service';
 
@@ -7,8 +7,8 @@ export class FoodController {
   constructor(private readonly FoodService: FoodService) {}
 
   @Get()
-  async findAll(): Promise<Food[]> {
-    return this.FoodService.findAll();
+  async findAll(@Query() query): Promise<Food[]> {
+    return this.FoodService.find(query);
   }
 
   @Get(':id')
@@ -16,17 +16,17 @@ export class FoodController {
     return this.FoodService.findOne(id);
   }
 
-  @Post()
+  @Post('/create')
   async create(@Body() Food: Food): Promise<Food> {
     return this.FoodService.create(Food);
   }
 
-  @Put(':id')
+  @Post('/update/:id')
   async update(@Param('id') id: number, @Body() Food: Food): Promise<Food> {
     return this.FoodService.update(id, Food);
   }
 
-  @Delete(':id')
+  @Delete('/delete/:id')
   async delete(@Param('id') id: number): Promise<void> {
     return this.FoodService.delete(id);
   }
