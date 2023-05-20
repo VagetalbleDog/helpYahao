@@ -1,27 +1,23 @@
 <template>
   <div id="app">
-    <router-view v-if="!shouldRedirectToLogin">111</router-view>
-    <router-view v-else-if="!shouldRedirectToAdminLogin">222</router-view>
-    <router-link v-else to="/login"></router-link>
+    <home v-if="this.$route.meta.showHome"></home>
+    <router-view v-else></router-view>
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-// import register from './components/RegisterComponent.vue'
-// import router from './router';
+
+import home from './components/HomeComponent.vue';
 
 export default {
   name: 'App',
   data: function() {
     return {
-      // register: localStorage.getItem('register') === '1'
     }
   },
   components: {
-    // HelloWorld,
-    // register,
-    // router
+
+    home,
   },
   computed: {
     shouldRedirectToLogin() {
@@ -41,6 +37,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  /* margin-top: 60px; */
+}
+
+* {
+  margin: 0;
 }
 </style>

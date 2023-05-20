@@ -58,7 +58,7 @@ export default {
                                     message: '登陆成功！',
                                     type: 'success'
                                 });
-                                localStorage.setItem('login', '1');
+                                localStorage.setItem('id', response.data.id);
                                 this.$router.push('/home');
                             }
 
@@ -86,7 +86,7 @@ export default {
 <style scoped>
 .login-container {
     max-width: 400px;
-    margin: 0 auto;
+    margin: 60px auto 0;
     padding: 20px;
     background-color: #f5f5f5;
     border-radius: 8px;
