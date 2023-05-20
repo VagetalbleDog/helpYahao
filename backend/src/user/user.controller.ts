@@ -10,7 +10,22 @@ export class UserController {
   async findAll(): Promise<User[]> {
     return this.userService.findAll();
   }
-
+  // 注册用户
+  @Post('/register')
+  async registerUser(@Body() user:User){
+    try{
+      const res = await this.userService.create(user);
+      return {
+        code:201,
+        message:'success'
+      }
+    }catch{
+      return {
+        code:500,
+        message:'failed'
+      }
+    }
+  }
   @Get(':id')
   async findOne(@Param('id') id: number): Promise<User> {
     return this.userService.findOne(id);

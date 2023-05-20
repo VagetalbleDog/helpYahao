@@ -4,19 +4,25 @@ export const enum UserType{
   'student',
   'ad'
 }
+export const enum Gender{
+  'male',
+  'female'
+}
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column()
+  phoneNumber:string;
+
   @Column({
     type:'varchar'
   })
   username: string;
-  @Column({
-    type:'varchar'
-  })
-  nickname: string;
+
+  @Column()
+  gender:Gender
 
   @Column({
     type:'varchar'
