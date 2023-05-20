@@ -19,7 +19,8 @@ export class UserController {
         code:201,
         message:'success'
       }
-    }catch{
+    }catch(e){
+      console.log(e);
       return {
         code:500,
         message:'failed'
