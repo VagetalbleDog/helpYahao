@@ -17,7 +17,7 @@ export class UserController {
       const res = await this.userService.create(user);
       return {
         code:201,
-        message:'success'
+        message:'success',
       }
     }catch(e){
       console.log(e);
@@ -34,7 +34,8 @@ export class UserController {
       const res = await this.userService.login(phoneNumber,password);
       return {
         code:201,
-        message:'success'
+        message:'success',
+        user:res
       }
     }catch(e){
       return {

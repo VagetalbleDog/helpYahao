@@ -98,13 +98,13 @@ export default {
                             if (response.data.code === 500) {
                                 this.$message({
                                     message: '注册失败，请重新注册！',
-                                    type: 'success'
+                                    type: 'warning'
                                 });
 
                             } else {
                                 this.$message({
                                     message: '注册成功，请登录！',
-                                    type: 'warning'
+                                    type: 'success'
                                 });
                                 this.$router.push('/login');
                             }

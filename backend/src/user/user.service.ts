@@ -30,7 +30,7 @@ export class UserService {
     if(user.password !== password){
       throw new Error()
     }
-    return true;
+    return user
   }
   async update(id: number, user: User): Promise<User> {
     await this.userRepository.update(id, user);

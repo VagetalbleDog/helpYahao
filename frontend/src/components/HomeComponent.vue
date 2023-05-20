@@ -15,6 +15,7 @@
                     <div v-else style="color: red;">请登录！</div>
                     <div v-if="user.id" class="right-buttons">
                         <el-button class="toolbar-item" type="primary" @click="goToPersonInfo">个人信息</el-button>
+                        <el-button class="toolbar-item" type="primary" @click="handleLogout">注销</el-button>
                     </div>
                 </div>
             </el-col>
@@ -87,6 +88,10 @@ export default {
         },
         handleDelete() {
             // 处理删除操作的逻辑
+        },
+        handleLogout(){
+            localStorage.clear();
+            this.$router.push('/login')
         }
     },
     mounted(){
