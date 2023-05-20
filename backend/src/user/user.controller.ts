@@ -27,6 +27,22 @@ export class UserController {
       }
     }
   }
+  // 登录
+  @Post('/login')
+  async login(@Body() {phoneNumber,password}){
+    try{
+      const res = await this.userService.login(phoneNumber,password);
+      return {
+        code:201,
+        message:'success'
+      }
+    }catch(e){
+      return {
+        code:500,
+        message:'failed'
+      }
+    }
+  }
   @Get(':id')
   async findOne(@Param('id') id: number): Promise<User> {
     return this.userService.findOne(id);

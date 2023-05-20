@@ -21,7 +21,17 @@ export class UserService {
   async create(user: User): Promise<User> {
     return this.userRepository.save(user);
   }
-
+  // 登录用户
+  async login(phoneNumber:string,password:string){
+    const user = await this.userRepository.findOneBy({phoneNumber:phoneNumber});
+    if(!user){
+      throw new Error()
+    }
+    if(user.password !== password){
+      throw new Error()
+    }
+    return true;
+  }
   async update(id: number, user: User): Promise<User> {
     await this.userRepository.update(id, user);
     return this.userRepository.findOne({ where: { id } });
