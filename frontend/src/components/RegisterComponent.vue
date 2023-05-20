@@ -78,19 +78,17 @@ export default {
                     axios.post('/user/register', data)
                         .then(response => {
                             // 注册成功的处理逻辑
-                            console.log(response);
-                            console.log('注册成功');
 
-                            if (response.code === 500) {
+                            if (response.status === 500) {
                                 this.$message({
-                                    message: '注册成功',
+                                    message: '注册失败',
                                     type: 'success'
                                 });
 
                                 // this.$router.push('/login');
                             }else {
                                 this.$message({
-                                    message: '注册失败，请重新注册！',
+                                    message: '注册成功，请重新注册！',
                                     type: 'warning'
                                 });
                             }

@@ -47,7 +47,7 @@ export default {
                     axios.post('/user/login', this.loginForm)
                         .then(response => {
                             // 注册成功的处理逻辑
-                            if (response.code === 500) {
+                            if (response.status === 500) {
                                 this.$message({
                                     message: '登录失败',
                                     type: 'warning'
