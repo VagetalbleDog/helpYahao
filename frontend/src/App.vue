@@ -1,18 +1,31 @@
 <template>
   <div id="app">
-    <register></register>
+    <router-view v-if="!shouldRedirectToRegister"></router-view>
+    <router-link v-else to="/register"></router-link>
   </div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-import register from './components/RegisterComponent.vue'
+// import register from './components/RegisterComponent.vue'
+// import router from './router';
 
 export default {
   name: 'App',
+  data: function() {
+    return {
+      // register: localStorage.getItem('register') === '1'
+    }
+  },
   components: {
     // HelloWorld,
-    register,
+    // register,
+    // router
+  },
+  computed: {
+    shouldRedirectToRegister() {
+      return localStorage.getItem('register') === '1';
+    }
   }
 }
 </script>

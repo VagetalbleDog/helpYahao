@@ -13,7 +13,7 @@
                     <el-radio :label="2">女</el-radio>
                 </el-radio-group>
             </el-form-item>
-            <el-form-item label="手机号" prop="phone">
+            <el-form-item label="手机号" prop="phoneNumber">
                 <el-input v-model="registerForm.phoneNumber"></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="password">
@@ -81,12 +81,20 @@ export default {
                             console.log(response);
                             console.log('注册成功');
 
-                            this.$message({
-                                message: '注册成功',
-                                type: 'success'
-                            });
+                            if (response.code === 500) {
+                                this.$message({
+                                    message: '注册成功',
+                                    type: 'success'
+                                });
 
-                            this.$router.push('/login');
+                                // this.$router.push('/login');
+                            }else {
+                                this.$message({
+                                    message: '注册失败，请重新注册！',
+                                    type: 'warning'
+                                });
+                            }
+
                         })
                         .catch(error => {
                             // 注册失败的处理逻辑

@@ -17,6 +17,8 @@
 </template>
   
 <script>
+import { Form, FormItem, Input, Button} from 'element-ui';
+import axios from 'axios';
 export default {
     data() {
         return {
@@ -30,13 +32,42 @@ export default {
             }
         };
     },
+    components: {
+        'el-form': Form,
+        'el-form-item': FormItem,
+        'el-input': Input,
+        'el-button': Button,
+    },
     methods: {
         login() {
             this.$refs.loginForm.validate((valid) => {
                 if (valid) {
-                    // 执行登录逻辑，发送登录请求到后端
-                    // 登录成功后的操作
+                    // 执行注册逻辑
+                    // 注册成功后的操作
+                    axios.post('/user/login', this.loginForm)
+                        .then(response => {
+                            // 注册成功的处理逻辑
+                            if (response.code === 500) {
+                                this.$message({
+                                    message: '登录失败',
+                                    type: 'warning'
+                                });
+
+                                // this.$router.push('/login');
+                            }else {
+                                this.$message({
+                                    message: '登陆成功！',
+                                    type: 'success'
+                                });
+                            }
+
+                        })
+                        .catch(error => {
+                            // 注册失败的处理逻辑
+                            console.error('注册失败', error);
+                        });
                 } else {
+                    console.log('asdf');
                     return false;
                 }
             });
