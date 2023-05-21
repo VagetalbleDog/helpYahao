@@ -17,8 +17,36 @@ export class FoodController {
   }
 
   @Post('/create')
-  async create(@Body() Food: Food): Promise<Food> {
-    return this.FoodService.create(Food);
+  async create(@Body() food: Food) {
+    try{
+      const res = await this.FoodService.create(food);
+      return {
+        code:201,
+        message:'success',
+        id:res.id
+      }
+    }
+    catch{
+      return {
+        code:500,
+        message:'failed'
+      }
+    }
+  }
+
+  @Get('/detail/:id')
+  async detail(@Param() {id}){
+    try{
+      const res = await this.FoodService.findOne(id);
+      return {
+        code:200,
+        data:res
+      }
+    }catch{
+      return {
+        code:500
+      }
+    }
   }
 
   @Post('/update/:id')
