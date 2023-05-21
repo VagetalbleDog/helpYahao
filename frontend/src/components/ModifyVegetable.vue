@@ -83,7 +83,7 @@ export default {
                                 message: '修改菜品成功！',
                                 type: 'success'
                             });
-                            this.$router.push(`/food/${response.data.id}`);
+                            this.$router.push(`/food/${id}`);
                         }
                     })
                 
@@ -91,11 +91,11 @@ export default {
         },
         getFood(){
             const id = this.$route.params.id;
-            axios.post('/food/detail'+id).then(response=>{
+            axios.get('/food/detail/'+id).then(response=>{
                 // let data=response.data.food;
                 // data.isRcm +='';
                 // this.food=data;
-                this.food=response.data.food;
+                this.food=response.data.data;
             })
         }
     },

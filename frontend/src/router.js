@@ -10,6 +10,8 @@ import setUserInfo from './components/setUserInfo.vue'
 import PublishVegetable from './components/PublishVegetable.vue'
 import foodDetail from './components/foodDetail.vue'
 import AllFood from './components/AllFood.vue'
+import ModifyVegetable from './components/ModifyVegetable.vue'
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -23,6 +25,7 @@ const routes = [
     { path: '/publishvegetable', component: PublishVegetable, name: 'publishVegetable',meta:{publishVegetable:true} },
     { path: "/food/:id", component: foodDetail, name: 'foodDetail', meta: { showHome: false } },
     { path: "/allfood", component: AllFood, name: 'allFood', meta: { showHome: false } },
+    {path:"/modifyvegetable/:id",component:ModifyVegetable,name:'modify',meta:{showHome:false}}
 
     // 其他路由配置
 ];

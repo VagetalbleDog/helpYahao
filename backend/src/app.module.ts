@@ -5,16 +5,17 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user/user.entity';
 import { UserModule } from './user/user.module';
 import { foodModule } from './food/food.module';
+import { Food } from './food/food.entity';
 @Module({
   imports: [TypeOrmModule.forRoot({
     type: "mysql",
     host: "localhost",
     username: "root",
     password: "cid418sh",
-    database: "canteenSystem",
+    database: "canteen",
     port: 3306,
-    entities: [User],
-    // synchronize: true,
+    entities: [User,Food],
+    synchronize: true,
     autoLoadEntities: true,
   }),
 UserModule,foodModule],
