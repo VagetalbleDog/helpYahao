@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <home v-if="this.$route.meta.showHome"></home>
-    <!-- <publish-vegetable ></publish-vegetable> -->
-    <router-view v-else-if="this.$route.meta.publishVegetable"></router-view>
+    <!-- <publish-vegetable v-else-if="this.$route.meta.publishVegetable"></publish-vegetable> -->
     <router-view v-else></router-view>
   </div>
 </template>

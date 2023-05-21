@@ -58,7 +58,6 @@ export default {
                 phoneNumber: '',
                 password: '',
                 confirmPassword: '',
-
                 type:1, // 1学生2管理员
             },
             registerFormRules: {
