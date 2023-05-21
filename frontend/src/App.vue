@@ -1,13 +1,14 @@
 <template>
   <div id="app">
     <home v-if="this.$route.meta.showHome"></home>
-    <router-view v-else></router-view>
+    <publish-vegetable v-else-if="this.$route.meta.publishVegetable"></publish-vegetable>
   </div>
 </template>
 
 <script>
 
 import home from './components/HomeComponent.vue';
+import PublishVegetable from './components/PublishVegetable.vue';
 
 export default {
   name: 'App',
@@ -16,7 +17,7 @@ export default {
     }
   },
   components: {
-
+    PublishVegetable,
     home,
   },
   computed: {
