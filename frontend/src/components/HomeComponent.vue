@@ -11,10 +11,10 @@
                     </div>
                     <div style="font-size: larger;;color: #409EFF;">高校食堂管理信息系统</div>
                     <div v-if="user.id">{{ user.username }}
-                        {{ user.type===1?"学生":"商家" }}</div>
+                        {{ user.type === 1 ? "学生" : "商家" }}</div>
                     <div v-else style="color: red;">请登录！</div>
                     <div v-if="user.id" class="right-buttons">
-                        <el-button class="toolbar-item" type="primary" @click="goToPersonInfo">个人信息</el-button>
+                        <el-button class="toolbar-item" type="primary" @click="goToUserCenter">个人信息</el-button>
                         <el-button class="toolbar-item" type="primary" @click="handleLogout">注销</el-button>
                     </div>
                 </div>
@@ -58,7 +58,7 @@ export default {
         return {
             foodList: [], // 数据库food中的数据
 
-            user:{},
+            user: {},
         };
     },
     methods: {
@@ -71,8 +71,9 @@ export default {
         goToAdminLogin() {
             this.$router.push('/adminlogin');
         },
-        goTOPersonInfo() {
-            this.$router.push('/personinfo')
+        goToUserCenter() {
+            const userId = localStorage.getItem('user').id; // 替换成实际的用户ID
+            this.$router.push({ name: 'userCenter', params: { id: userId } });
         },
         handleButton5() {
             // 处理按钮5的逻辑
@@ -89,13 +90,13 @@ export default {
         handleDelete() {
             // 处理删除操作的逻辑
         },
-        handleLogout(){
+        handleLogout() {
             localStorage.clear();
             this.$router.push('/login')
         }
     },
-    mounted(){
-        this.user=JSON.parse(localStorage.getItem('user'));
+    mounted() {
+        this.user = JSON.parse(localStorage.getItem('user'));
     }
 };
 </script>
