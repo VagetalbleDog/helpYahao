@@ -9,7 +9,7 @@
                         <el-button class="toolbar-item" type="primary" @click="goToLogin">用户登录</el-button>
                         <el-button class="toolbar-item" type="primary" @click="goToAdminLogin">商家登录</el-button>
                     </div>
-                    <div style="font-size: larger;;color: #409EFF;" @click="goTOHome">高校食堂管理信息系统</div>
+                    <div style="font-size: larger;;color: #409EFF;cursor: pointer;" @click="goTOHome">高校食堂管理信息系统</div>
                     <div v-if="user.id">{{ user.username }}
                         {{ user.type === 1 ? "学生" : "商家" }}</div>
                     <div v-else style="color: red;">请登录！</div>
@@ -35,7 +35,7 @@
                         <el-button type="success" @click="handleUpdate">更新</el-button>
                     </el-col>
                     <el-col :span="6">
-                        <el-button type="success" @click="handleDelete">删除</el-button>
+                        <el-button type="success" @click="handleDelete">删除菜品</el-button>
                     </el-col>
                 </el-row>
             </el-col>
@@ -56,23 +56,36 @@ export default {
     },
     methods: {
         goToRegister() {
-            this.$router.push('/register');
+            if (this.$router.currentRoute.path !== '/register') {
+                this.$router.push('/register');
+            }
         },
         goToLogin() {
-            this.$router.push('/login');
+            if (this.$router.currentRoute.path !== '/login') {
+                this.$router.push('/login');
+            }
         },
         goToAdminLogin() {
-            this.$router.push('/adminlogin');
+            if (this.$router.currentRoute.path !== '/adminlogin') {
+                this.$router.push('/adminlogin');
+            }
         },
         goToUserCenter() {
-            const userId = localStorage.getItem('user').id; // 替换成实际的用户ID
-            this.$router.push({ name: 'userCenter', params: { id: userId } });
+            if (this.$router.currentRoute.path !== '/userCenter') {
+                const userId = localStorage.getItem('user').id; // 替换成实际的用户ID
+                this.$router.push({ name: 'userCenter', params: { id: userId } });
+            }
         },
         goTOHome() {
-            this.$router.push('/home');
+            if (this.$router.currentRoute.path !== '/home'&&this.$router.currentRoute.path !== '/') {
+                this.$router.push('/home');
+            }
         },
         handlePublishVegetable() {
-            this.$router.push('/publishvegetable');
+            if (this.$router.currentRoute.path !== '/publishvegetable') {
+                this.$router.push('/publishvegetable');
+            }
+            return
         },
         handleRead() {
             // 处理读取操作的逻辑
@@ -146,6 +159,5 @@ export default {
 
 .database-data {
     width: 100%;
-}
-</style>
+}</style>
   

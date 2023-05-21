@@ -14,7 +14,7 @@ import { foodModule } from './food/food.module';
     database: "canteenSystem",
     port: 3306,
     entities: [User],
-    synchronize: true,
+    // synchronize: true,
     autoLoadEntities: true,
   }),
 UserModule,foodModule],
