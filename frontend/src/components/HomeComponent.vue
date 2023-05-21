@@ -1,7 +1,7 @@
 <template>
     <div>
         <header-bar></header-bar>
-
+        <!-- <div v-if="this.$route.meta.publishVegetable"><PublishVegetable></PublishVegetable></div> -->
     </div>
 </template>
 
