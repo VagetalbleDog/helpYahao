@@ -57,7 +57,7 @@ export default {
                 foodPrice: "",
                 foodType: 1,
                 saleCount: 0,
-                isRcm: "",
+                isRcm: 1,
                 foodDesc: "",
             },
         };

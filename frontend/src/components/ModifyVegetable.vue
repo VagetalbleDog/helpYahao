@@ -92,9 +92,10 @@ export default {
         getFood(){
             const id = this.$route.params.id;
             axios.post('/food/detail'+id).then(response=>{
-                let data=response.data.food;
-                data.isRcm +='';
-                this.food=data;
+                // let data=response.data.food;
+                // data.isRcm +='';
+                // this.food=data;
+                this.food=response.data.food;
             })
         }
     },
