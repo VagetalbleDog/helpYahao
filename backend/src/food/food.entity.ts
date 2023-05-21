@@ -37,6 +37,9 @@ export class Food {
   @Column()
   isRcm:ISRECTYPE;
 
+  @Column()
+  foodDesc:string;
+  
   @ManyToOne(()=>User,user=>user.publishFoods)
   publishBy:User
 }
