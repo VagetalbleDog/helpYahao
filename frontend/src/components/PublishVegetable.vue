@@ -81,8 +81,8 @@ export default {
                     type: "warning",
                 });
             }
-
-            this.food.isRcm = parseInt(this.food.isRcm);
+            // console.log(this.food.isRcm);
+            // this.food.isRcm = parseInt(this.food.isRcm);
             this.food.publishBy = JSON.parse(user);
             axios.post("/food/create", this.food).then((response) => {
                 if (response.data.code === 500) {

@@ -69,7 +69,7 @@ export default {
     },
     methods: {
         submitForm() {
-                    this.food.isRcm = parseInt(this.food.isRcm);
+                    // this.food.isRcm = parseInt(this.food.isRcm);
                     const id = this.$route.params.id;
                     axios.post('/food/update/'+id, this.food).then(response => {
                         if (response.data.code === 500) {
