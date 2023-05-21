@@ -9,6 +9,8 @@ import userCenter from './components/userCenter.vue'
 import setUserInfo from './components/setUserInfo.vue'
 import PublishVegetable from './components/PublishVegetable.vue'
 import foodDetail from './components/foodDetail.vue'
+import ModifyVegetable from './components/ModifyVegetable.vue'
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -20,7 +22,8 @@ const routes = [
     { path: '/userCenter/:id', component: userCenter, name: 'userCenter',meta:{showHome:false} },
     { path: '/setUserInfo/:id', component: setUserInfo, name: 'setUserInfo',meta:{showHome:false} },
     { path: '/publishvegetable', component: PublishVegetable, name: 'publishVegetable',meta:{publishVegetable:true} },
-    { path: "/food/:id", component: foodDetail, name: 'foodDetail', meta: { showHome: false } }
+    { path: "/food/:id", component: foodDetail, name: 'foodDetail', meta: { showHome: false } },
+    {path:"/modifyvegetable/:id",component:ModifyVegetable,name:'modify',meta:{showHome:false}}
 
     // 其他路由配置
 ];

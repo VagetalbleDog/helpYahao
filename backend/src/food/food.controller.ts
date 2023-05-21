@@ -4,7 +4,7 @@ import { FoodService } from './food.service';
 
 @Controller('food')
 export class FoodController {
-  constructor(private readonly FoodService: FoodService) {}
+  constructor(private readonly FoodService: FoodService) { }
 
   @Get()
   async findAll(@Query() query): Promise<Food[]> {
@@ -18,44 +18,63 @@ export class FoodController {
 
   @Post('/create')
   async create(@Body() food: Food) {
-    try{
+    try {
       const res = await this.FoodService.create(food);
       return {
-        code:201,
-        message:'success',
-        id:res.id
+        code: 201,
+        message: 'success',
+        id: res.id
       }
     }
-    catch{
+    catch (e){
+      console.log(e)
       return {
-        code:500,
-        message:'failed'
+        code: 500,
+        message: 'failed'
       }
     }
   }
 
   @Get('/detail/:id')
-  async detail(@Param() {id}){
-    try{
+  async detail(@Param() { id }) {
+    try {
       const res = await this.FoodService.findOne(id);
       return {
-        code:200,
-        data:res
+        code: 200,
+        data: res
       }
-    }catch{
+    } catch {
       return {
-        code:500
+        code: 500
       }
     }
   }
 
   @Post('/update/:id')
-  async update(@Param('id') id: number, @Body() Food: Food): Promise<Food> {
-    return this.FoodService.update(id, Food);
+  async update(@Param('id') id: number, @Body() Food: Food) {
+    try {
+      const res = await this.FoodService.update(id, Food);
+      return {
+        code: 201
+      }
+    } catch {
+      return {
+        code: 500
+      }
+    }
   }
 
-  @Delete('/delete/:id')
-  async delete(@Param('id') id: number): Promise<void> {
-    return this.FoodService.delete(id);
+  @Post('/delete/:id')
+  async delete(@Param('id') id: number) {
+    try {
+      const res = await this.FoodService.delete(id)
+      return {
+        code: 201
+      }
+    } catch {
+      return {
+        code: 500
+      }
+    }
   }
 }

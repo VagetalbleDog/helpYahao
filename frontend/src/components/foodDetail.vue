@@ -2,16 +2,31 @@
   <div class="ctn">
     <div class="top">
       <div class="left">
-        <h1>{{ data.foodName }}</h1>
-        <h2>食品价格：{{ data.foodPrice }}</h2>
-        <h2>食品销量：{{ data.saleCount }}</h2>
-        <h2>食品类型：{{ data.foodType }}</h2>
-        <h2>发布商家：{{ data.publishBy.username }}</h2>
-        <h3 v-if="data.isRcm === 1">今日推荐</h3>
+        <div class="foodName">{{ data.foodName }}</div>
+        <div class="foodLabel">食品价格：{{ data.foodPrice }}</div>
+        <div class="foodLabel">食品销量：{{ data.saleCount }}</div>
+        <div class="foodLabel">食品类型：{{ data.foodType }}</div>
+        <div class="foodLabel">发布商家：{{ data.publishBy.username }}</div>
+        <div v-if="data.isRcm === 1">
+          <el-tag class="foodName" effect="dark"> 今日推荐 </el-tag>
+        </div>
       </div>
-      <div class="right"></div>
+      <div class="right">
+        <img
+          class="img"
+          alt=""
+          src="https://ts1.cn.mm.bing.net/th/id/R-C.b3a7697d2793ba094a861d546c31190d?rik=NevOIW4XmkUuMA&riu=http%3a%2f%2fseopic.699pic.com%2fphoto%2f50069%2f5445.jpg_wh1200.jpg&ehk=wuLPicg%2b9wXz8QAwp%2fAVFBtJQ6loBUiVfQZu2bbZODA%3d&risl=&pid=ImgRaw&r=0"
+        />
+      </div>
     </div>
-    <div class="bottom"></div>
+    <hr />
+    <div class="bottom">
+      <div class="desc">{{ data.foodDesc }}</div>
+      <div class="buttonGroup">
+        <el-button type="warning" @click="handleEdit">更改菜品信息</el-button>
+        <el-button type="danger" @click="handleDelete">删除菜品</el-button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -52,6 +67,30 @@ export default {
         })
         .catch((error) => console.log(error));
     },
+    handleEdit() {
+      const id = this.$route.params.id;
+      this.$router.push(`/modifyvegetable/${id}`)
+    },
+    handleDelete() {
+      const res = window.confirm("你确定要删除吗");
+      if (res) {
+        const id = this.$route.params.id;
+        axios.post(`/food/delete/${id}`).then((res) => {
+          if (res.data.code === 500) {
+            this.$message({
+              message: "删除失败",
+              type: "warning",
+            });
+          } else {
+            this.$message({
+              message: "删除成功",
+              type: "success",
+            });
+            this.$router.push("/");
+          }
+        });
+      }
+    },
   },
 };
 </script>
@@ -67,5 +106,47 @@ export default {
   box-shadow: 20px 20px 20px 20px rgba(0, 0, 0, 0.2);
   border: 1px solid black;
   border-radius: 5%;
+  display: flex;
+  flex-direction: column;
+}
+.top {
+  display: flex;
+  padding: 32px;
+}
+.left {
+  width: 50%;
+  text-align: left;
+}
+.foodName {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 800;
+}
+.foodLabel {
+  margin: 16px 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+.bottom {
+  padding: 32px;
+  text-align: left;
+  font-size: 18px;
+  font-weight: 500;
+}
+.right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img {
+  width: 360px;
+}
+.desc {
+  height: 300px;
+}
+.buttonGroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
