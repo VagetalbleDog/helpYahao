@@ -9,7 +9,7 @@
                         <el-button class="toolbar-item" type="primary" @click="goToLogin">用户登录</el-button>
                         <el-button class="toolbar-item" type="primary" @click="goToAdminLogin">商家登录</el-button>
                     </div>
-                    <div style="font-size: larger;;color: #409EFF;">高校食堂管理信息系统</div>
+                    <div style="font-size: larger;;color: #409EFF;" @click="goTOHome">高校食堂管理信息系统</div>
                     <div v-if="user.id">{{ user.username }}
                         {{ user.type === 1 ? "学生" : "商家" }}</div>
                     <div v-else style="color: red;">请登录！</div>
@@ -67,6 +67,9 @@ export default {
         goToUserCenter() {
             const userId = localStorage.getItem('user').id; // 替换成实际的用户ID
             this.$router.push({ name: 'userCenter', params: { id: userId } });
+        },
+        goTOHome() {
+            this.$router.push('/home');
         },
         handlePublishVegetable() {
             this.$router.push('/publishvegetable');

@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <home v-if="this.$route.meta.showHome"></home>
-    <publish-vegetable v-else-if="this.$route.meta.publishVegetable"></publish-vegetable>
+    <!-- <publish-vegetable ></publish-vegetable> -->
+    <router-view v-else-if="this.$route.meta.publishVegetable"></router-view>
     <router-view v-else></router-view>
   </div>
 </template>
@@ -9,7 +10,7 @@
 <script>
 
 import home from './components/HomeComponent.vue';
-import PublishVegetable from './components/PublishVegetable.vue';
+// import PublishVegetable from './components/PublishVegetable.vue';
 
 export default {
   name: 'App',
@@ -18,7 +19,7 @@ export default {
     }
   },
   components: {
-    PublishVegetable,
+    // PublishVegetable,
     home,
   },
   computed: {

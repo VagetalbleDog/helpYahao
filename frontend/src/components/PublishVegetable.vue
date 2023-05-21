@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div style="display: flex;flex-direction: column;">
         <header-bar></header-bar>
-        <div >
+        <div style="width:50vw;align-self: center;">
             <el-form ref="foodForm" label-width="120px">
                 <el-form-item label="食物名称">
                     <el-input v-model="food.foodName"></el-input>
@@ -68,7 +68,6 @@ export default {
     },
     methods: {
         submitForm() {
-
                     this.food.isRcm = parseInt(this.food.isRcm);
                     axios.post('/food/create', this.food).then(response => {
                         if (response.data.code === 500) {
@@ -92,3 +91,12 @@ export default {
 };
 </script>
   
+<style scoped>
+/* .content {
+    width: 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+</style>
