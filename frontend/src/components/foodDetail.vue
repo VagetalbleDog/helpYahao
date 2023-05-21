@@ -40,7 +40,7 @@ export default {
     };
   },
   mounted() {
-    const id = this.$route.param.id;
+    const id = this.$route.params.id;
     this.fetchData(id); // 在组件挂载后调用fetchData方法获取数据
   },
   methods: {
@@ -48,7 +48,7 @@ export default {
       axios
         .get("/food/detail/" + id)
         .then((response) => {
-          console.log(response);
+          this.data = response.data.data;
         })
         .catch((error) => console.log(error));
     },
