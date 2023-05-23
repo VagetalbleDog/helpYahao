@@ -7,7 +7,7 @@
         </el-row>
 
         <div class="login-container">
-            <h2>用户登录</h2>
+            <h2>顾客登录</h2>
             <el-form ref="loginForm" :model="loginForm" :rules="loginFormRules" label-width="100px">
                 <el-form-item label="手机号" prop="phoneNumber">
                     <el-input v-model="loginForm.phoneNumber"></el-input>
@@ -17,7 +17,7 @@
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="login">确认登录</el-button>
-                    <el-button @click="goToAdminLogin">管理员登录</el-button>
+                    <el-button @click="goToAdminLogin">商家登录</el-button>
                     <el-button @click="goToRegister">注册</el-button>
                 </el-form-item>
             </el-form>

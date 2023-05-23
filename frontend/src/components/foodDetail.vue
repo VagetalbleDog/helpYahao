@@ -1,11 +1,12 @@
 <template>
+<div><header-bar></header-bar>
   <div class="ctn">
     <div class="top">
       <div class="left">
         <div class="foodName">{{ data.foodName }}</div>
         <div class="foodLabel">食品价格：{{ data.foodPrice }}</div>
         <div class="foodLabel">食品销量：{{ data.saleCount }}</div>
-        <div class="foodLabel">食品类型：{{ data.foodType }}</div>
+        <div class="foodLabel">食品类型：{{ data.foodType}}</div>
         <div class="foodLabel">发布商家：{{ data.publishBy.username }}</div>
         <div v-if="data.isRcm === 1">
           <el-tag class="foodName" effect="dark"> 今日推荐 </el-tag>
@@ -15,7 +16,7 @@
         <img
           class="img"
           alt=""
-          src="https://ts1.cn.mm.bing.net/th/id/R-C.b3a7697d2793ba094a861d546c31190d?rik=NevOIW4XmkUuMA&riu=http%3a%2f%2fseopic.699pic.com%2fphoto%2f50069%2f5445.jpg_wh1200.jpg&ehk=wuLPicg%2b9wXz8QAwp%2fAVFBtJQ6loBUiVfQZu2bbZODA%3d&risl=&pid=ImgRaw&r=0"
+          :src="data.foodAvatarUrl"
         />
       </div>
     </div>
@@ -23,18 +24,34 @@
     <div class="bottom">
       <div class="desc">{{ data.foodDesc }}</div>
       <div class="buttonGroup">
-        <el-button type="warning" @click="handleEdit">更改菜品信息</el-button>
-        <el-button type="danger" @click="handleDelete">删除菜品</el-button>
+        <el-button type="warning" @click="handleEdit" v-if="isLogin===2">更改菜品信息</el-button>
+        <el-button type="danger" @click="handleDelete" v-if="isLogin===2">删除菜品</el-button>
+        <a :href="`https://so.meishij.net/?q=${data.foodName}`" class="href">
+          <el-button type="success">站外链接</el-button>
+        </a>
       </div>
     </div>
-  </div>
+  </div></div>
+
 </template>
 
 <script>
 import axios from "axios";
-
+import HeaderBar from "./HeaderBar.vue";
+const foodTypeTextMap = {
+    [1]:'主食',
+    [2]:'面条',
+    [3]:'蔬菜',
+    [4]:'肉类',
+    [5]:'饮料',
+    [6]:'小吃',
+    [7]:'水果'
+}
 export default {
   name: "FoodInfo",
+  components: {
+        HeaderBar,
+    },
   data() {
     return {
       data: {
@@ -43,7 +60,7 @@ export default {
         foodAvatarUrl:
           "https://ts1.cn.mm.bing.net/th/id/R-C.b3a7697d2793ba094a861d546c31190d?rik=NevOIW4XmkUuMA&riu=http%3a%2f%2fseopic.699pic.com%2fphoto%2f50069%2f5445.jpg_wh1200.jpg&ehk=wuLPicg%2b9wXz8QAwp%2fAVFBtJQ6loBUiVfQZu2bbZODA%3d&risl=&pid=ImgRaw&r=0",
         foodPrice: 18,
-        foodType: 1,
+        foodType: foodTypeTextMap[1],
         saleCount: 22,
         isRcm: 1,
         foodDesc: "炸串一种非常好吃的东西",
@@ -52,11 +69,13 @@ export default {
           username: "东大炸串",
         },
       },
+      isLogin:0,
     };
   },
   mounted() {
     const id = this.$route.params.id;
     this.fetchData(id); // 在组件挂载后调用fetchData方法获取数据
+    this.isLogin = JSON.parse(localStorage.getItem('user')).type
   },
   methods: {
     fetchData(id) {
@@ -64,6 +83,7 @@ export default {
         .get("/food/detail/" + id)
         .then((response) => {
           this.data = response.data.data;
+          this.data.foodType = foodTypeTextMap[this.data.foodType]
         })
         .catch((error) => console.log(error));
     },
@@ -91,6 +111,7 @@ export default {
         });
       }
     },
+    
   },
 };
 </script>
@@ -148,5 +169,9 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
+}
+.href{
+  margin-left: 8px;
 }
 </style>

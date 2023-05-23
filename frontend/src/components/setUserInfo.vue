@@ -1,4 +1,6 @@
 <template>
+<div>
+    <header-bar></header-bar>
     <div class="register-container">
         <h2>设置个人信息</h2>
         <el-form ref="registerForm" :model="registerForm" :rules="registerFormRules" label-width="100px"
@@ -25,12 +27,13 @@
             </el-form-item>
         </el-form>
     </div>
+</div>
 </template>
 
 <script>
 import { Form, FormItem, Input, Button, Radio, RadioGroup } from 'element-ui';
 import axios from 'axios';
-
+import HeaderBar from "./HeaderBar.vue"
 export default {
     data() {
         return {
@@ -60,7 +63,8 @@ export default {
         'el-input': Input,
         'el-button': Button,
         'el-radio': Radio,
-        'el-radio-group': RadioGroup
+        'el-radio-group': RadioGroup,
+        HeaderBar
     },
     methods: {
         submitForm() {

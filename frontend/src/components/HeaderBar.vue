@@ -4,10 +4,17 @@
         <el-row class="toolbar" justify="center">
             <el-col :span="24">
                 <div class="toolbar-wrapper">
-                    <div class="left-buttons">
+                    <div class="left-buttons" v-if="!isLogin">
                         <el-button class="toolbar-item" type="primary" @click="goToRegister">注册</el-button>
-                        <el-button class="toolbar-item" type="primary" @click="goToLogin">用户登录</el-button>
+                        <el-button class="toolbar-item" type="primary" @click="goToLogin">顾客登录</el-button>
                         <el-button class="toolbar-item" type="primary" @click="goToAdminLogin">商家登录</el-button>
+                    </div>
+                    <div class="left-buttons" v-if="isLogin===2">
+                        <el-button class="toolbar-item" type="primary" @click="handlePublishVegetable">发布菜品</el-button>
+                        <el-button class="toolbar-item" type="primary" @click="goToAllFood">全部菜品</el-button>
+                    </div>
+                    <div class="left-buttons" v-if="isLogin===1">
+                        <el-button class="toolbar-item" type="primary" @click="goToAllFood">全部菜品</el-button>
                     </div>
                     <div style="font-size: larger;;color: #409EFF;cursor: pointer;" @click="goTOHome">高校食堂管理信息系统</div>
                     <div v-if="user.id">{{ user.username }}
@@ -21,25 +28,6 @@
             </el-col>
         </el-row>
         <!-- 主题内容 -->
-        <el-row class="content" justify="center">
-            <el-col :span="24">
-                <!-- 数据库操作按钮 -->
-                <el-row class="database-buttons" justify="center" :gutter="[10, 20]">
-                    <el-col :span="6">
-                        <el-button type="success" @click="handlePublishVegetable">发布菜品</el-button>
-                    </el-col>
-                    <el-col :span="6">
-                        <el-button type="success" @click="handleRead">读取</el-button>
-                    </el-col>
-                    <el-col :span="6">
-                        <el-button type="success" @click="handleUpdate">更新</el-button>
-                    </el-col>
-                    <el-col :span="6">
-                        <el-button type="success" @click="handleDelete">删除菜品</el-button>
-                    </el-col>
-                </el-row>
-            </el-col>
-        </el-row>
     </div>
 </template>
 
@@ -50,8 +38,8 @@ export default {
     data() {
         return {
             foodList: [], // 数据库food中的数据
-
             user: {},
+            isLogin:0,
         };
     },
     methods: {
@@ -72,8 +60,8 @@ export default {
         },
         goToUserCenter() {
             if (this.$router.currentRoute.path !== '/userCenter') {
-                const userId = localStorage.getItem('user').id; // 替换成实际的用户ID
-                this.$router.push({ name: 'userCenter', params: { id: userId } });
+                const userId = JSON.parse(localStorage.getItem('user')).id; // 替换成实际的用户ID
+                this.$router.push(`/userCenter/${userId}`);
             }
         },
         goTOHome() {
@@ -84,6 +72,12 @@ export default {
         handlePublishVegetable() {
             if (this.$router.currentRoute.path !== '/publishvegetable') {
                 this.$router.push('/publishvegetable');
+            }
+            return
+        },
+        goToAllFood(){
+            if (this.$router.currentRoute.path !== '/allfood') {
+                this.$router.push('/allfood');
             }
             return
         },
@@ -103,6 +97,7 @@ export default {
     },
     mounted() {
         this.user = JSON.parse(localStorage.getItem('user'));
+        this.isLogin = JSON.parse(localStorage.getItem('user')).type
     }
 };
 </script>

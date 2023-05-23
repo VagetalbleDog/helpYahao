@@ -36,8 +36,8 @@
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="submitForm">注册</el-button>
-                    <el-button type="primary" @click="goToAdminLogin">管理员登录</el-button>
-                    <el-button type="primary" @click="goToLogin">用户登录</el-button>
+                    <el-button type="primary" @click="goToAdminLogin">商家登录</el-button>
+                    <el-button type="primary" @click="goToLogin">顾客登录</el-button>
 
                 </el-form-item>
             </el-form>

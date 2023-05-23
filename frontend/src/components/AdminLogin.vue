@@ -6,7 +6,7 @@
             </el-col>
         </el-row>
         <div class="login-container">
-            <h2>管理员登录</h2>
+            <h2>商家登录</h2>
             <el-form ref="loginForm" :model="loginForm" :rules="loginFormRules" label-width="100px">
                 <el-form-item label="手机号" prop="phoneNumber">
                     <el-input v-model="loginForm.phoneNumber"></el-input>
@@ -16,7 +16,7 @@
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="login">确认登录</el-button>
-                    <el-button @click="goToLogin">用户登录</el-button>
+                    <el-button @click="goToLogin">顾客登录</el-button>
                     <el-button @click="goToRegister">注册</el-button>
                 </el-form-item>
             </el-form>
@@ -65,7 +65,7 @@ export default {
                                     message: '登陆成功，欢迎使用！',
                                     type: 'success'
                                 });
-                                localStorage.setItem('id', response.data.id);
+                                localStorage.setItem('user', JSON.stringify(response.data.user));
                                 this.$router.push('/home');
                             }
 

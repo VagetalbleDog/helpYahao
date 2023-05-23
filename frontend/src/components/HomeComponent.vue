@@ -1,10 +1,7 @@
 <template>
     <div>
-        <div v-if="login===0"><header-bar></header-bar></div>
-        <div v-else-if="login===1"><student-header-bar></student-header-bar></div>
-        <div v-else><saler-header-bar></saler-header-bar></div>
-        <today-rcm></today-rcm>
-
+        <header-bar></header-bar>
+        <today-rcm :foodList="foodList"></today-rcm>
     </div>
 </template>
 
@@ -13,8 +10,7 @@
 import HeaderBar from "./HeaderBar.vue"
 import TodayRcm from "./TodayRcm.vue"
 import axios from "axios"
-import StudentHeaderBar from "./StudentHeaderBar.vue"
-import SalerHeaderBar from './SalerHeaderBar.vue'
+
 
 export default {
     name: 'HomePage',
@@ -27,8 +23,6 @@ export default {
     components: {
         HeaderBar,
         TodayRcm,
-        StudentHeaderBar,
-        SalerHeaderBar,
     },
     methods: {
         isLogin(){
@@ -40,14 +34,14 @@ export default {
             }
         },
         getFoodList(){
-            axios.get('/').then(response => {
+            axios.get('/food').then(response => {
                 if (response.data.code === 500) {
                     this.$message({
                         message:'获取今日推荐失败！',
                         type: 'warning',
                     })
                 }else {
-                    this.foodList = response.data.data;
+                    this.foodList = response.data;
                 }
             })
         },
